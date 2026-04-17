@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truhlářství Profesor – Nábytek na míru | Cvikov</title>
+  <meta name="description" content="Truhlářství Profesor – nábytek všeho druhu na míru. Cvikov a okolí. Zavolejte: 776 030 066" />
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f0f0f;
+      --surface:  #1a1a1a;
+      --border:   #2e2e2e;
+      --gold:     #c9a84c;
+      --gold-lt:  #e2c47a;
+      --text:     #e8e8e8;
+      --muted:    #888;
+      --radius:   10px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(15,15,15,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 1.1rem; font-weight: 700; color: var(--gold); letter-spacing: .03em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .9rem; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--gold); color: #111; font-weight: 600;
+      padding: .45rem 1.1rem; border-radius: 6px; font-size: .85rem;
+      text-decoration: none; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      text-align: center; padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15,15,15,.6) 0%, rgba(15,15,15,.85) 60%, var(--bg) 100%),
+        url('[images.unsplash.com](https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=1600&q=80)') center/cover no-repeat;
+      z-index: 0;
+    }
+    #hero > * { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block; border: 1px solid var(--gold);
+      color: var(--gold); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;
+      padding: .35rem .9rem; border-radius: 30px; margin-bottom: 1.5rem;
+    }
+    #hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; line-height: 1.15; max-width: 800px; margin-bottom: 1.2rem; }
+    #hero h1 em { font-style: normal; color: var(--gold); }
+    #hero p { font-size: 1.1rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--gold); color: #111; font-weight: 700;
+      padding: .85rem 2rem; border-radius: 8px; font-size: 1rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--text);
+      padding: .85rem 2rem; border-radius: 8px; font-size: 1rem;
+      text-decoration: none; transition: border-color .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    /* SECTIONS */
+    section { padding: 90px 5%; }
+    .section-label { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+    .section-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; margin-bottom: 1rem; }
+    .section-sub { color: var(--muted); max-width: 540px; margin-bottom: 3rem; }
+
+    /* SERVICES */
+    #sluzby { background: var(--surface); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .service-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.8rem 1.5rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .service-icon { font-size: 2rem; margin-bottom: .9rem; }
+    .service-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+    .service-card p { font-size: .88rem; color: var(--muted); }
+
+    /* GALLERY */
+    #galerie { background: var(--bg); }
+    .gallery-fb-block {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1.5rem;
+      padding: 3rem 2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); max-width: 520px;
+    }
+    .gallery-fb-icon { font-size: 3rem; }
+    .gallery-fb-block h3 { font-size: 1.2rem; font-weight: 600; }
+    .gallery-fb-block p { font-size: .92rem; color: var(--muted); }
+    .btn-fb {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: #1877f2; color: #fff; font-weight: 600;
+      padding: .8rem 1.8rem; border-radius: 8px; font-size: .95rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-fb:hover { background: #1565d8; transform: translateY(-2px); }
+
+    /* PROCESS */
+    #postup { background: var(--surface); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+    .step { text-align: center; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--gold); color: #111; font-weight: 700; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: .4rem; }
+    .step p { font-size: .87rem; color: var(--muted); }
+
+    /* PRICING */
+    #cenik { background: var(--bg); }
+    .pricing-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2.5rem; max-width: 600px;
+    }
+    .pricing-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
+    .pricing-card ul { list-style: none; margin-bottom: 1.5rem; }
+    .pricing-card li {
+      padding: .5rem 0; border-bottom: 1px solid var(--border);
+      font-size: .93rem; color: var(--muted);
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .pricing-card li::before { content: '✓'; color: var(--gold); font-weight: 700; }
+    .pricing-note {
+      background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.25);
+      border-radius: 6px; padding: .9rem 1.1rem;
+      font-size: .88rem; color: var(--gold-lt);
+    }
+
+    /* CONTACT */
+    #kontakt { background: var(--surface); }
+    .contact-intro {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 580px; margin-bottom: 3rem; line-height: 1.7;
+    }
+    .contact-intro strong { color: var(--text); }
+    .contact-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem; max-width: 700px;
+    }
+    .contact-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: border-color .25s;
+    }
+    .contact-card:hover { border-color: var(--gold); }
+    .contact-card-icon { font-size: 2rem; }
+    .contact-card-label { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .contact-card-value { font-size: 1.15rem; font-weight: 600; }
+    .contact-card-desc { font-size: .88rem; color: var(--muted); }
+    .contact-card-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--gold); color: #111; font-weight: 700;
+      padding: .75rem 1.4rem; border-radius: 8px; font-size: .92rem;
+      text-decoration: none; margin-top: .5rem;
+      transition: background .2s, transform .15s;
+    }
+    .contact-card-btn:hover { background: var(--gold-lt); transform: translateY(-2px); }
+    .contact-card-btn.outline {
+      background: transparent; color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .contact-card-btn.outline:hover { background: rgba(201,168,76,.1); }
+    .contact-extra {
+      margin-top: 2.5rem; display: flex; flex-direction: column; gap: .8rem;
+    }
+    .contact-extra-item {
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .9rem; color: var(--muted);
+    }
+    .contact-extra-item span:first-child { font-size: 1.1rem; }
+    .contact-extra-item a { color: var(--muted); text-decoration: none; }
+    .contact-extra-item a:hover { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 2.5rem 5%; text-align: center;
+      font-size: .83rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+    .footer-logo { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: .5rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--surface); padding: 1rem 5%; gap: 1rem; border-bottom: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Truhlářství Profesor</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sluzby">Služby</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#postup">Jak to probíhá</a></li>
+    <li><a href="#cenik">Ceník</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="tel:776030066" class="nav-cta">📞 776 030 066</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Cvikov & okolí · Nábytek na míru</div>
+  <h1>Ruční práce, která<br><em>vydrží celý život</em></h1>
+  <p>Vyrábíme nábytek všeho druhu přesně podle vašich představ – od kuchyní přes skříně až po zahradní nábytek.</p>
+  <div class="hero-btns">
+    <a href="tel:776030066" class="btn-primary">📞 Zavolejte nám</a>
+    <a href="#postup" class="btn-outline">Jak to funguje?</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="sluzby">
+  <div class="section-label">Co děláme</div>
+  <h2 class="section-title">Nábytek a truhlářské práce na míru</h2>
+  <p class="section-sub">Každý kus vyrábíme ručně s důrazem na kvalitu materiálu a preciznost zpracování.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🍳</div>
+      <h3>Kuchyňské linky</h3>
+      <p>Kuchyně přesně do vašeho prostoru, dle výběru materiálu a barev.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚪</div>
+      <h3>Skříně a vestavěné skříně</h3>
+      <p>Vestavěné i volně stojící skříně maximálně využívající dostupný prostor.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛏️</div>
+      <h3>Ložnicový nábytek</h3>
+      <p>Postele, noční stolky a komody – masiv i dřevotříska dle přání.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🪑</div>
+      <h3>Obývací pokoje</h3>
+      <p>TV stěny, knihovny, police a komody do obývacího pokoje.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌿</div>
+      <h3>Zahradní nábytek</h3>
+      <p>Lavičky, stoly a pergoly z odolného dřeva do exteriéru.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✏️</div>
+      <h3>Atypické zakázky</h3>
+      <p>Máte netradiční nápad? Rádi ho s vámi probereme a zrealizujeme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerie">
+  <div class="section-label">Naše práce</div>
+  <h2 class="section-title">Ukázky zakázek</h2>
+  <p class="section-sub">Prohlédněte si naše realizace přímo na Facebooku – průběžně přidáváme nové fotky z dokončených zakázek.</p>
+  <div class="gallery-fb-block">
+    <div class="gallery-fb-icon">📸</div>
+    <h3>Fotogalerie na Facebooku</h3>
+    <p>Desítky fotek kuchyní, skříní, ložnicového nábytku a dalších zakázek přímo z naší dílny.</p>
+    <a href="[facebook.com](https://www.facebook.com/TruhlarstviProfettsor/photos)" target="_blank" rel="noopener" class="btn-fb">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.887v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      Zobrazit fotky na Facebooku
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="postup">
+  <div class="section-label">Jak to probíhá</div>
+  <h2 class="section-title">Jednoduché kroky od nápadu k výrobku</h2>
+  <p class="section-sub">Žádná zbytečná byrokracie. Vše si probereme osobně nebo po telefonu.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Zavoláte nám</h3>
+      <p>Řeknete nám, co potřebujete. Domluvíme termín návštěvy nebo zaměření.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Přijedeme a naměříme</h3>
+      <p>Na místě změříme prostor, zjistíme vaše požadavky a připravíme návrh.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Domluvíme materiál a cenu</h3>
+      <p>Vybereme materiál, finišujeme design a dohodneme se na ceně. Žádná překvapení.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Vyrobíme a dodáme</h3>
+      <p>Nábytek vyrobíme v naší dílně a doručíme přímo k vám včetně montáže.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="cenik">
+  <div class="section-label">Ceník</div>
+  <h2 class="section-title">Cena dle materiálu a rozsahu</h2>
+  <p class="section-sub">Každá zakázka je individuální. Proto cenu vždy stanovujeme na míru – na všem se lze dohodnout.</p>
+  <div class="pricing-card">
+    <h3>Co cenu ovlivňuje?</h3>
+    <ul>
+      <li>Typ a kvalita použitého materiálu (masiv, dýha, MDF, laminát…)</li>
+      <li>Složitost konstrukce a rozměry</li>
+      <li>Typ povrchové úpravy (lak, olej, vosk, folie…)</li>
+      <li>Kování, úchytky a doplňky</li>
+      <li>Doprava a montáž</li>
+    </ul>
+    <div class="pricing-note">
+      💬 Nezávazná konzultace a nacenění jsou <strong>zdarma</strong>. Stačí zavolat nebo napsat e-mail – rádi vše probereme.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontakt">
+  <div class="section-label">Spojte se s námi</div>
+  <h2 class="section-title">Kontakt</h2>
+  <p class="contact-intro">
+    Máte zájem o zakázku? <strong>Zavolejte mi</strong> – rovnou se domluvíme na termínu
+    a probereme, co potřebujete. Nebo mi <strong>pošlete e-mail s poptávkou</strong>
+    a já se vám obratem ozvu.
+  </p>
+
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="contact-card-icon">📞</div>
+      <div>
+        <div class="contact-card-label">Telefon</div>
+        <div class="contact-card-value">776 030 066</div>
+      </div>
+      <div class="contact-card-desc">Po–Pá 7:00–17:00, So dle dohody. Zavolejte a hned se domluvíme.</div>
+      <a href="tel:776030066" class="contact-card-btn">Zavolat</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-icon">✉️</div>
+      <div>
+        <div class="contact-card-label">E-mail</div>
+        <div class="contact-card-value" style="font-size:.95rem;">truhlarstviprofesor@atlas.cz</div>
+      </div>
+      <div class="contact-card-desc">Napište poptávku – rozměry, typ nábytku, termín. Ozvu se obratem.</div>
+      <a href="mailto:truhlarstviprofesor@atlas.cz" class="contact-card-btn outline">Napsat e-mail</a>
+    </div>
+  </div>
+
+  <div class="contact-extra">
+    <div class="contact-extra-item">
+      <span>📍</span>
+      <span>Cvikov, 471 54, Česká republika</span>
+    </div>
+    <div class="contact-extra-item">
+      <span>👍</span>
+      <span>
+        <a href="[facebook.com](https://www.facebook.com/TruhlarstviProfettsor/)" target="_blank" rel="noopener">
+          Facebook – Truhlářství Profesor
+        </a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Truhlářství Profesor</div>
+  <p>Cvikov, 471 54 · <a href="tel:776030066">776 030 066</a> · <a href="mailto:truhlarstviprofesor@atlas.cz">truhlarstviprofesor@atlas.cz</a></p>
+  <p style="margin-top:.5rem;">© 2025 Truhlářství Profesor. Všechna práva vyhrazena.</p>
+</footer>
+
+<script>
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAs    = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navAs.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
